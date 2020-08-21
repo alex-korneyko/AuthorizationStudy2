@@ -1,0 +1,17 @@
+﻿<h1>Home</h1>
+
+<p>
+    IsAuthenticated: @ViewBag.IsAuthenticated
+</p>
+
+<p>
+    Username: @ViewBag.Name
+    <br/>
+    <a asp-controller="Admin" asp-action="Logoff">Logoff</a>
+</p>
+
+<a asp-controller="Admin" asp-action="Index">Administrator main page</a>
+<br/>
+<a asp-controller="Admin" asp-action="Administrator">Admin role-access page</a>
+<br/>
+<a asp-controller="Admin" asp-action="Manager">Manager role-access page</a>
