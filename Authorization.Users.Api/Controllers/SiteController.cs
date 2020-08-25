@@ -1,5 +1,4 @@
 ﻿using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using IdentityModel.Client;
 using Microsoft.AspNetCore.Mvc;
@@ -7,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Authorization.Users.Api.Controllers
 {
     [Route("[controller]")]
-    public class SiteController: Controller
+    public class SiteController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;
 
@@ -29,13 +28,14 @@ namespace Authorization.Users.Api.Controllers
             var authClient = _httpClientFactory.CreateClient();
             var discoveryDocument = await authClient.GetDiscoveryDocumentAsync("https://localhost:10001");
 
-            var tokenResponse = await authClient.RequestClientCredentialsTokenAsync(new ClientCredentialsTokenRequest
-            {
-                Address = discoveryDocument.TokenEndpoint,
-                ClientId = "client_id",
-                ClientSecret = "client_secret",
-                Scope = "OrdersAPI"
-            });
+            var tokenResponse = await authClient.RequestClientCredentialsTokenAsync(
+                new ClientCredentialsTokenRequest
+                {
+                    Address = discoveryDocument.TokenEndpoint,
+                    ClientId = "client_id",
+                    ClientSecret = "client_secret",
+                    Scope = "OrdersAPI"
+                });
 
             //retrieve to Orders
             var ordersClient = _httpClientFactory.CreateClient();

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Authorization.Orders.Api
 {
@@ -18,8 +19,14 @@ namespace Authorization.Orders.Api
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
                 {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ClockSkew = TimeSpan.FromSeconds(5),
+                        ValidateAudience = false
+                    };
+                    
                     options.Authority = "https://localhost:10001";
-                    options.Audience = "OrdersAPI";
+                    options.Audience = "https://localhost:10001";
                 });
             
             services.AddControllersWithViews();

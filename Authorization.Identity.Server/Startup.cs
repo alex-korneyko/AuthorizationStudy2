@@ -13,7 +13,8 @@ namespace Authorization.Identity.Server
                 .AddInMemoryClients(Configuration.GetClients())
                 .AddInMemoryApiResources(Configuration.GetApiResources())
                 .AddInMemoryIdentityResources(Configuration.GetIdentityResources())
-                .AddDeveloperSigningCredential();
+                .AddDeveloperSigningCredential()
+                .AddInMemoryApiScopes(Configuration.GetApiScopes());
             
             services.AddControllersWithViews();
         }
